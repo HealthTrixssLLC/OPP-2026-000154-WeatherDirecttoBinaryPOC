@@ -1,0 +1,31 @@
+PE HEADER RECEIPT — weather.exe
+Inspector: source/dump-pe.js (Node byte reader, not a compiler)
+File: C:\Projects\test-binary-qrokbuild\weather.exe
+Size: 8704 bytes
+
+DOS signature:        MZ  PASS
+e_lfanew:             0x80
+PE signature:         "PE\u0000\u0000"  PASS
+Machine:              0x8664  AMD64 PASS
+Sections:             3
+Optional magic:       0x20b  PE32+ PASS
+Entry RVA:            0x1843
+ImageBase:            0x140000000
+SectionAlign:         0x1000
+FileAlign:            0x200
+SizeOfImage:          0x4000
+SizeOfHeaders:        0x200
+Subsystem:            3  CONSOLE PASS
+DllCharacteristics:   0x160
+Characteristics:      0x22
+NumberOfRvaAndSizes:  16
+Import dir RVA/size:  0x2000 / 60
+IAT RVA/size:         0x3000 / 104
+
+SECTIONS
+  .text    VA=0x1000 VSize=3575 RawPtr=0x200 RawSize=3584 Ch=0x60000020
+  .rdata   VA=0x2000 VSize=1296 RawPtr=0x1000 RawSize=1536 Ch=0x40000040
+  .data    VA=0x3000 VSize=2968 RawPtr=0x1600 RawSize=3072 Ch=0xc0000040
+
+NOT a .NET image (no mscoree): PASS
+NOT linked to MSVC CRT:          PASS

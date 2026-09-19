@@ -1,0 +1,14 @@
+Weather CLI changelog
+=====================
+
+Version 1.0.0  (2026-09-19)  build 20260919.1
+---------------------------------------------
+- Native PE32+ x64 console weather.exe, written as bytes (no C/C#/Go/Rust/Python compile)
+- Prompts for name and US ZIP code
+- Geocodes ZIP via zippopotam.us
+- Current conditions + 7-day forecast via Open-Meteo (Fahrenheit, precip %)
+- Output: "{name} here is the forecast for {zip}" then Now + 7 day lines
+- ZIP+4 accepted (uses first 5 digits)
+- Empty name / bad ZIP re-prompt; unknown ZIP exits 1
+- Version banner: Weather CLI v1.0.0
+- Git tag: v1.0.0

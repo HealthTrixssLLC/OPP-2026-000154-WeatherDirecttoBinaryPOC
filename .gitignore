@@ -1,0 +1,5 @@
+Thumbs.db
+Desktop.ini
+*.tmp
+*.log
+node_modules/

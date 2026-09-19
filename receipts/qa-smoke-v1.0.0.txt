@@ -1,0 +1,17 @@
+Weather CLI v1.0.0
+Enter your name: Enter ZIP code: Fetching weather...
+
+Jay here is the forecast for 90210
+
+Now: 66 F
+
+Saturday 2026-09-19  High: 77 F  Low: 61 F  Precipitation: 0%
+Sunday 2026-09-20  High: 76 F  Low: 62 F  Precipitation: 2%
+Monday 2026-09-21  High: 78 F  Low: 67 F  Precipitation: 1%
+Tuesday 2026-09-22  High: 77 F  Low: 67 F  Precipitation: 1%
+Wednesday 2026-09-23  High: 79 F  Low: 67 F  Precipitation: 0%
+Thursday 2026-09-24  High: 83 F  Low: 70 F  Precipitation: 0%
+Friday 2026-09-25  High: 82 F  Low: 70 F  Precipitation: 2%
+
+Data: Open-Meteo.com (CC BY 4.0)
+

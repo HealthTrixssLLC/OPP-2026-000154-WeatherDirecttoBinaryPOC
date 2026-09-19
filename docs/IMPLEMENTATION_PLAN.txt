@@ -1,0 +1,76 @@
+Weather CLI v1.0.0 — Implementation plan
+=======================================
+Document version: 1.0.0
+Approved: 2026-09-19 (plan mode, then executed)
+Workspace: C:\Projects\test-binary-qrokbuild
+
+GOAL
+----
+Deliver a working Windows console weather.exe that:
+  1. Prompts for a user name
+  2. Prompts for a US ZIP code
+  3. Looks up that ZIP on the internet for local weather now + 7-day forecast
+  4. Prints:
+       {name} here is the forecast for {zip}
+       Now: {temp} F
+       {Weekday} {YYYY-MM-DD}  High: {H} F  Low: {L} F  Precipitation: {P}%
+       (7 day lines)
+
+CONSTRAINT (from the request)
+-----------------------------
+Write at the lowest level. Create a Windows binary .exe without using
+compiled languages. Create the program directly as a compiled binary
+(PE image of x64 machine code), not by compiling C/C++/C#/Go/Rust.
+
+This machine had: Node 22, PowerShell 5.1, curl, .NET runtime (no SDK).
+This machine did NOT have: gcc, cl, csc, nasm, ml64, rustc, go, Python
+(the WindowsApps python.exe is a Store stub, not a working interpreter).
+
+DESIGN APPROACH
+---------------
+- Product is native PE32+ x64, subsystem CONSOLE (3).
+- Node.js is only a byte writer (interpreted). It does not package JS
+  into the exe and does not invoke a compiler.
+- Running image imports only:
+    kernel32.dll  GetStdHandle, WriteFile, ReadFile, GetProcessHeap,
+                  HeapAlloc, HeapFree, ExitProcess
+    wininet.dll   InternetOpenA, InternetOpenUrlA, InternetReadFile,
+                  InternetCloseHandle
+- RIP-relative addressing; IAT patched by the Windows loader.
+- No MSVC CRT, no .NET host (mscoree), no Python.
+
+Weather data (no API key):
+  1. GET https://api.zippopotam.us/us/{zip}          -> lat/lon
+  2. GET https://api.open-meteo.com/v1/forecast?...  -> current + 7-day
+     daily=temperature_2m_max,temperature_2m_min,precipitation_probability_max
+     temperature_unit=fahrenheit  forecast_days=7
+  3. User-Agent: WeatherCli/1.0.0
+  4. Attribution: Data: Open-Meteo.com (CC BY 4.0)
+
+JSON is scanned for known keys, not fully parsed.
+Temps rounded from the first decimal digit (0.5 and up rounds away from zero
+on the absolute value). Weekday via Zeller congruence.
+
+Input rules:
+  - Name: trim; re-prompt if empty (max 10)
+  - ZIP: 5 digits or ZIP+4 (first 5 used); else re-prompt (max 3, then exit 1)
+  - ZIP 404 / no latitude: Could not find location for ZIP {zip}.
+  - Network fail: Could not reach weather service...
+
+BUILD APPROACH
+--------------
+1. Hand-written x64 opcode emitter in source/pe-emit.js
+     DOS stub, COFF + PE32+ optional header, .text / .rdata / .data
+     Import directory + ILT + IAT + hint/name tables
+     Routines emitted as bytes: strlen, strcpy, append, find, parse_number,
+     itoa, weekday, print, read_line (1-byte ReadFile), http_get (WinINet),
+     extract_value, parse arrays, main
+2. node source/pe-emit.js writes weather.exe via fs.writeFileSync
+3. QA by actually running the exe (piped stdin) and comparing highs/lows/
+   precip % to live Open-Meteo JSON
+4. Fixes were in the emitter (SIB index cannot be R12; weekday must save
+   R12/R13), then the PE was regenerated — still no compiler
+
+OUT OF SCOPE
+------------
+GUI, installer, Authenticode signing, non-US postal codes, Celsius.

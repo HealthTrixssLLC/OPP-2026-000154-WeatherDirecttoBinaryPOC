@@ -1,0 +1,42 @@
+PROOF: weather.exe WAS NOT PRODUCED BY A COMPILER
+=================================================
+Product: Weather CLI v1.0.0
+Binary:  C:\Projects\test-binary-qrokbuild\weather.exe
+
+What "without compiled code" means here
+---------------------------------------
+There is no C, C++, C#, Go, Rust, or assembly source that was fed to
+gcc / cl / csc / go / rustc / nasm / ml64. Those tools are not installed.
+
+The running program is x64 machine code inside a PE32+ file. The bytes
+were assembled by source/pe-emit.js, a Node.js script that emits opcodes
+(for example REX.W + 0x8B for MOV, 0xFF 0x15 for CALL [rip+IAT]) and
+writes them with fs.writeFileSync.
+
+Node is interpreted. It is a typewriter for bytes, not a compiler of the
+weather app. The JS is not inside weather.exe (import table has no node,
+no chakra, no v8).
+
+Chain of custody
+----------------
+1. Request: create a Windows .exe at the lowest level, no compiled languages
+2. Plan: docs/IMPLEMENTATION_PLAN.txt (approved 2026-09-19)
+3. Emitter written: source/pe-emit.js
+4. Emit: node source/pe-emit.js  ->  weather.exe
+5. QA: run the exe, match Open-Meteo  (receipts/qa-results.txt)
+6. Version: 1.0.0 banner + git tag v1.0.0
+
+Rebuild (re-creates the same class of image):
+  node source\pe-emit.js
+
+Receipts in this folder
+-----------------------
+  sha256.txt              hashes of exe and emitter
+  pe-headers.txt          MZ / PE32+ / console / AMD64
+  import-table.txt        kernel32 + wininet only
+  ascii-strings.txt       "Weather CLI v1.0.0" and API URLs inside the image
+  toolchain-absent.txt    compilers not present on the build host
+  qa-results.txt          functional + live API match
+  qa-smoke-v1.0.0.txt     captured stdout
+  usage-snapshot-turn1.json  token usage from the implementation turn
+  HOW_THIS_WAS_BUILT.txt  this file

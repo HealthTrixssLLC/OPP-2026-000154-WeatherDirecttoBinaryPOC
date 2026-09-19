@@ -1,0 +1,22 @@
+IMPORT TABLE RECEIPT — weather.exe
+Only Windows system DLLs should appear.
+No compiler runtime, no .NET, no Python.
+
+kernel32.dll
+  GetStdHandle
+  WriteFile
+  ReadFile
+  GetProcessHeap
+  HeapAlloc
+  HeapFree
+  ExitProcess
+
+wininet.dll
+  InternetOpenA
+  InternetOpenUrlA
+  InternetReadFile
+  InternetCloseHandle
+
+DLL list: kernel32.dll, wininet.dll
+.NET host present: NO — PASS
+MSVC CRT present:  NO — PASS

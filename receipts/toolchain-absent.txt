@@ -1,0 +1,35 @@
+TOOLCHAIN NEGATIVE RECEIPT
+==========================
+Captured: 2026-09-19 (local Central Time)
+Host: Windows 10/11 x64  (Microsoft Windows NT 10.0.26200.0)
+Purpose: prove weather.exe was not produced by a language compiler
+
+Compilers / assemblers looked up with Get-Command:
+
+  gcc      NOT FOUND
+  cl       NOT FOUND     (MSVC C/C++)
+  csc      NOT FOUND     (C# compiler)
+  nasm     NOT FOUND
+  ml64     NOT FOUND     (MASM)
+  rustc    NOT FOUND
+  go       NOT FOUND
+  link     NOT FOUND
+  py       NOT FOUND
+  python   C:\Users\JayBaker\AppData\Local\Microsoft\WindowsApps\python.exe
+           (Store alias stub — "Python was not found"; not a working interpreter)
+
+Present, and used only as a BYTE WRITER / inspector:
+
+  node     C:\Program Files\nodejs\node.exe   v22.14.0
+  curl     C:\Windows\System32\curl.exe       8.21.0 (QA against live APIs)
+  powershell  5.1.26100.9444                  (test harness, receipts)
+  git      2.47.1.windows.2                   (version control after the fact)
+  dotnet   runtime 6.0.36 and 8.0.31 only — NO SDK, so no `dotnet build`
+
+weather.exe import table (see import-table.txt):
+  kernel32.dll + wininet.dll only
+  no mscoree.dll  (.NET)
+  no vcruntime / msvcrt / ucrtbase  (MSVC CRT)
+
+Rebuild command (still not a compile):
+  node source\pe-emit.js
