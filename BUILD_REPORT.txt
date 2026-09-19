@@ -25,7 +25,8 @@ Elapsed (dev/QA):      21 minutes 43 seconds
 
 v1.0.0 rebuild:        2026-09-19 10:06:55 CDT   version banner + receipts
 Documentation pass:    2026-09-19 10:05 CDT – 10:09:43 CDT
-Git commit/tag:        2026-09-19 10:09:43 CDT   9933de98 / v1.0.0
+Git commit/tag:        2026-09-19 10:09:43 CDT   tag v1.0.0
+                       commit eabbe7c7eac9e759fbe8ab7003d3ee44a55946fe
 
 2. TOKENS USED
 --------------
@@ -104,7 +105,7 @@ Rebuild:
                         docs/VERSION.txt
                         docs/CHANGELOG.txt
   Git tag:              v1.0.0
-  Git commit:           9933de98606ca7e73c0e254dc33287daeb31da0a
+  Git commit:           eabbe7c7eac9e759fbe8ab7003d3ee44a55946fe
   Receipt:              receipts/git-v1.0.0.txt
 
 7. QA RESULTS

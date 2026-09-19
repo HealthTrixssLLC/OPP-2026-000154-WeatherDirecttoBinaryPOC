@@ -4,7 +4,8 @@ Repository:  C:\Projects\test-binary-qrokbuild
 Branch:      master
 Tag:         v1.0.0  (annotated)
 
-Commit:      9933de98606ca7e73c0e254dc33287daeb31da0a
+Commit:      eabbe7c7eac9e759fbe8ab7003d3ee44a55946fe
+Verify:      git rev-parse v1.0.0^{commit}
 Author:      JayAllanBaker <jaybaker@healthtrixss.com>
 AuthorDate:  Sat Sep 19 10:09:43 2026 -0500
 Message:     v1.0.0: native PE weather CLI emitted as bytes, docs and receipts
