@@ -1,0 +1,8 @@
+GIT VERSION CONTROL RECEIPT
+===========================
+Repository:  C:\Projects\test-binary-qrokbuild
+Branch:      master
+Tag:         v1.0.2  (annotated)
+Commit:      c650f06e0d3cbf6b3fe45f999d099aaa776a91cb
+Verify:      git rev-parse v1.0.2^{commit}
+Message:     v1.0.2: ArcGIS ZIP geocode so 75072 and other missing ZIPs work
