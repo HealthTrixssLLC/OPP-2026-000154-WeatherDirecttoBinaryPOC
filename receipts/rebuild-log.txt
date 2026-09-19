@@ -1,8 +1,8 @@
-REBUILD LOG ? Weather CLI v1.0.0
+REBUILD LOG ? Weather CLI v1.0.1
 Command: node source\pe-emit.js
-When:    2026-09-19 10:06:55 CDT
+When:    2026-09-19 10:12:13 -05:00
 Output:  Wrote C:\Projects\test-binary-qrokbuild\weather.exe
-         Size 8704
-         App Weather CLI 1.0.0 build 20260919.1
+         Size 9216
+         App Weather CLI 1.0.1 build 20260919.2
 Exit:    0
-This command writes PE bytes. It does not invoke gcc, cl, csc, nasm, or dotnet build.
+Change:  pause_exit waits for Enter so the console stays open.

@@ -1,0 +1,8 @@
+use local C:\Projects\test-binary
+create a small test application - i want to test your ability to write at the lowest level - create a windows biney application .exe with outusing complied languages or code - create this is directly in to complied binary.  here are the requirements:
+run in command line - 
+ask for user name
+ask for zip code
+use zip code to search the internet for the local weather now and a 7 day forecast
+then respond with Jay here is the forecast for [zip code] and then list each day as a line with the high, low and perceptation %
+qa and make this perfect

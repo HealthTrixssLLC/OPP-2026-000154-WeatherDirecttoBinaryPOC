@@ -1,5 +1,15 @@
-QA RESULTS RECEIPT — Weather CLI v1.0.0
+QA RESULTS RECEIPT — Weather CLI v1.0.1
 =======================================
+v1.0.1 pause (2026-09-19):
+  Banner Weather CLI v1.0.1                              PASS
+  "Press Enter to close..." after forecast               PASS
+  Process still running 3s after ZIP if stdin left open  PASS
+  Enter then exit 0                                      PASS
+  Piped EOF after ZIP still exits (no hang)              PASS
+  Unknown ZIP 00000: error + pause + exit 1              PASS
+
+Original v1.0.0 cases below still apply (numbers vary by live API).
+
 Method: run weather.exe with redirected stdin (not a screenshot).
 Compare printed High/Low/Precipitation to live Open-Meteo JSON
 (rounded using first decimal digit, 5+ rounds up).

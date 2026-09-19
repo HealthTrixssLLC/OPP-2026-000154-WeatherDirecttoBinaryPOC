@@ -1,11 +1,23 @@
 ================================================================================
 WEATHER CLI — BUILD REPORT
 Product:     Weather CLI
-Version:     1.0.0
-Build:       20260919.1
+Version:     1.0.1
+Build:       20260919.2
 Document:    BUILD_REPORT.txt  (also BUILD_REPORT.rxt)
 Host:        C:\Projects\test-binary-qrokbuild
 ================================================================================
+
+0. REVISION 1.0.1  (2026-09-19)
+-------------------------------
+Change: After name/ZIP/forecast (and on errors), the app prints
+        "Press Enter to close..." and waits. A double-clicked cmd
+        window no longer closes as soon as the ZIP is entered.
+Why:    Windows destroys the console when the process exits.
+QA:     Process still alive 3s after forecast if stdin left open;
+        Enter (or EOF on a pipe) then exits. Exit code 0 on success,
+        1 on unknown ZIP. Banner is Weather CLI v1.0.1.
+Git tag: v1.0.1
+
 
 1. CLOCK
 --------
@@ -97,16 +109,15 @@ Rebuild:
 
 6. VERSION CONTROL
 ------------------
-  App version string:   Weather CLI v1.0.0   (printed at startup)
-  User-Agent:           WeatherCli/1.0.0
-  Docs version:         1.0.0
+  App version string:   Weather CLI v1.0.1   (printed at startup)
+  User-Agent:           WeatherCli/1.0.1
+  Docs version:         1.0.1
   Files:                VERSION
                         source/VERSION
                         docs/VERSION.txt
                         docs/CHANGELOG.txt
-  Git tag:              v1.0.0
-  Git commit:           eabbe7c7eac9e759fbe8ab7003d3ee44a55946fe
-  Receipt:              receipts/git-v1.0.0.txt
+  Git tag:              v1.0.1  (v1.0.0 retained)
+  Receipt:              receipts/git-v1.0.1.txt
 
 7. QA RESULTS
 -------------
@@ -149,7 +160,7 @@ SHA256 source/pe-emit.js:
 
 9. TREE
 -------
-  weather.exe                 native app (v1.0.0)
+  weather.exe                 native app (v1.0.1)
   VERSION                     app/docs version stamp
   BUILD_REPORT.txt            this report
   BUILD_REPORT.rxt            same report (requested filename)

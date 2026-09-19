@@ -1,6 +1,15 @@
 Weather CLI changelog
 =====================
 
+Version 1.0.1  (2026-09-19)  build 20260919.2
+---------------------------------------------
+- Console stays open after the forecast (and after errors)
+- Prints "Press Enter to close..." and waits so a double-clicked
+  window does not vanish
+- Piped/EOF stdin still exits (automated tests do not hang)
+- Banner / User-Agent: Weather CLI v1.0.1
+- Git tag: v1.0.1
+
 Version 1.0.0  (2026-09-19)  build 20260919.1
 ---------------------------------------------
 - Native PE32+ x64 console weather.exe, written as bytes (no C/C#/Go/Rust/Python compile)

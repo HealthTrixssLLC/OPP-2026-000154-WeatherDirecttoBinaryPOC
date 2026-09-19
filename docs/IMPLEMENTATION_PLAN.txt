@@ -1,6 +1,6 @@
-Weather CLI v1.0.0 — Implementation plan
+Weather CLI v1.0.1 — Implementation plan
 =======================================
-Document version: 1.0.0
+Document version: 1.0.1
 Approved: 2026-09-19 (plan mode, then executed)
 Workspace: C:\Projects\test-binary-qrokbuild
 
@@ -15,6 +15,8 @@ Deliver a working Windows console weather.exe that:
        Now: {temp} F
        {Weekday} {YYYY-MM-DD}  High: {H} F  Low: {L} F  Precipitation: {P}%
        (7 day lines)
+  5. Wait for Enter so a double-clicked console stays open
+     (v1.0.1)
 
 CONSTRAINT (from the request)
 -----------------------------
@@ -44,7 +46,7 @@ Weather data (no API key):
   2. GET https://api.open-meteo.com/v1/forecast?...  -> current + 7-day
      daily=temperature_2m_max,temperature_2m_min,precipitation_probability_max
      temperature_unit=fahrenheit  forecast_days=7
-  3. User-Agent: WeatherCli/1.0.0
+  3. User-Agent: WeatherCli/1.0.1
   4. Attribution: Data: Open-Meteo.com (CC BY 4.0)
 
 JSON is scanned for known keys, not fully parsed.

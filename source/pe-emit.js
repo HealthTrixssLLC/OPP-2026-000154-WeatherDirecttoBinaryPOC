@@ -8,14 +8,14 @@
  * source, no assembler, no .NET runtime host.
  *
  * Product: Weather CLI
- * Version: 1.0.0
+ * Version: 1.0.1
  */
 const fs = require('fs');
 const path = require('path');
 
 const APP_NAME = 'Weather CLI';
-const APP_VERSION = '1.0.0';
-const APP_BUILD = '20260919.1';
+const APP_VERSION = '1.0.1';
+const APP_BUILD = '20260919.2';
 
 const RAX = 0, RCX = 1, RDX = 2, RBX = 3, RSP = 4, RBP = 5, RSI = 6, RDI = 7;
 const R8 = 8, R9 = 9, R10 = 10, R11 = 11, R12 = 12, R13 = 13, R14 = 14, R15 = 15;
@@ -394,10 +394,11 @@ const STRINGS = {
   s_pct: '%',
   s_space: ' ',
   s_attr: 'Data: Open-Meteo.com (CC BY 4.0)\r\n',
-  s_banner: 'Weather CLI v1.0.0\r\n',
-  s_agent: 'WeatherCli/1.0.0',
-  s_headers: 'User-Agent: WeatherCli/1.0.0\r\n',
-  s_version: '1.0.0',
+  s_banner: 'Weather CLI v1.0.1\r\n',
+  s_agent: 'WeatherCli/1.0.1',
+  s_headers: 'User-Agent: WeatherCli/1.0.1\r\n',
+  s_version: '1.0.1',
+  s_pause: '\r\nPress Enter to close...',
   s_url_zip: 'https://api.zippopotam.us/us/',
   s_url_f1: 'https://api.open-meteo.com/v1/forecast?latitude=',
   s_url_f2: '&longitude=',
@@ -434,6 +435,7 @@ const DATA_FIELDS = [
   ['d_lows', 7 * 8],
   ['d_precips', 7 * 8],
   ['d_save', 64],
+  ['d_exitCode', 8],
 ];
 
 function emitProgram(a) {
@@ -1053,12 +1055,25 @@ function emitProgram(a) {
   a.mov_rm(R13, RBP, null, -24);
   a.epilog();
 
+  // ---------- pause so a double-clicked console stays open ----------
+  // rcx = exit code. Prints "Press Enter to close..." then waits.
+  // Piped stdin hits EOF immediately and does not hang tests.
+  a.label('pause_exit');
+  a.mov_to_rip(RCX, 'd_exitCode');
+  a.lea_rip(RCX, 's_pause');
+  a.call_lab('print');
+  a.lea_rip(RCX, 'd_tmp');
+  a.mov_ri32(RDX, 16);
+  a.call_lab('read_line');
+  a.mov_from_rip(RCX, 'd_exitCode');
+  a.call_iat('iat_ExitProcess');
+
   // ---------- die_net / die_loc / exit ----------
   a.label('die_net');
   a.lea_rip(RCX, 's_err_net');
   a.call_lab('print');
   a.mov_ri32(RCX, 1);
-  a.call_iat('iat_ExitProcess');
+  a.jmp('pause_exit');
 
   a.label('die_loc');
   a.lea_rip(RCX, 's_err_loc');
@@ -1068,7 +1083,7 @@ function emitProgram(a) {
   a.lea_rip(RCX, 's_crlf');
   a.call_lab('print');
   a.mov_ri32(RCX, 1);
-  a.call_iat('iat_ExitProcess');
+  a.jmp('pause_exit');
 
   // ---------- entry / main ----------
   a.label('entry');
@@ -1143,7 +1158,7 @@ function emitProgram(a) {
   a.jmp('zip_loop');
   a.label('zip_giveup');
   a.mov_ri32(RCX, 1);
-  a.call_iat('iat_ExitProcess');
+  a.jmp('pause_exit');
   a.label('zip_ok');
 
   a.lea_rip(RCX, 's_fetching');
@@ -1385,8 +1400,8 @@ function emitProgram(a) {
   a.call_lab('print');
   a.lea_rip(RCX, 's_attr');
   a.call_lab('print');
-  a.mov_ri32(RCX, 0);
-  a.call_iat('iat_ExitProcess');
+  a.xor_r(RCX);
+  a.jmp('pause_exit');
 }
 
 function writeDesc(buf, off, oft, name, ft) {

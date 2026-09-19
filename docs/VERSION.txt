@@ -1,16 +1,17 @@
 Product:        Weather CLI
-Version:        1.0.0
-Build:          20260919.1
+Version:        1.0.1
+Build:          20260919.2
 Release date:   2026-09-19
 Status:         QA passed
 
 App binary:     weather.exe
 App version
-  string:       Weather CLI v1.0.0
-  user-agent:   WeatherCli/1.0.0
+  string:       Weather CLI v1.0.1
+  user-agent:   WeatherCli/1.0.1
 
-Docs version:   1.0.0 (this tree)
-Git tag:        v1.0.0
+Docs version:   1.0.1 (this tree)
+Git tag:        v1.0.1
 
 Versioning scheme: MAJOR.MINOR.PATCH
   1.0.0 — first native PE weather CLI (byte-emitted, no compiled language)
+  1.0.1 — keep console open after forecast/errors (Press Enter to close)
