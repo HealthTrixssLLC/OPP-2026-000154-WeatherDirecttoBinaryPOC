@@ -1,0 +1,14 @@
+GIT VERSION CONTROL RECEIPT
+===========================
+Repository:  C:\Projects\test-binary-qrokbuild
+Branch:      master
+Tag:         v1.0.1  (annotated)
+
+Commit:      548465082bfe3a33076c2340bbb7c7e8fc1b44ea
+Verify:      git rev-parse v1.0.1^{commit}
+Message:     v1.0.1: keep console open after forecast (Press Enter to close)
+
+Change: weather.exe waits for Enter after output/errors so a
+double-clicked console does not close immediately.
+
+Prior tag v1.0.0 is retained.
