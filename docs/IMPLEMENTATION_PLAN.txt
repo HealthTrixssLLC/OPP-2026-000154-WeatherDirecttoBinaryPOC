@@ -1,6 +1,6 @@
-Weather CLI v1.0.1 — Implementation plan
+Weather CLI v1.0.2 — Implementation plan
 =======================================
-Document version: 1.0.1
+Document version: 1.0.2
 Approved: 2026-09-19 (plan mode, then executed)
 Workspace: C:\Projects\test-binary-qrokbuild
 
@@ -42,11 +42,13 @@ DESIGN APPROACH
 - No MSVC CRT, no .NET host (mscoree), no Python.
 
 Weather data (no API key):
-  1. GET https://api.zippopotam.us/us/{zip}          -> lat/lon
+  1. GET ArcGIS findAddressCandidates?singleLine={zip}&countryCode=USA
+     (require score 100) -> lat (y) / lon (x)
+     Fallback: GET https://api.zippopotam.us/us/{zip}
   2. GET https://api.open-meteo.com/v1/forecast?...  -> current + 7-day
      daily=temperature_2m_max,temperature_2m_min,precipitation_probability_max
      temperature_unit=fahrenheit  forecast_days=7
-  3. User-Agent: WeatherCli/1.0.1
+  3. User-Agent: WeatherCli/1.0.2
   4. Attribution: Data: Open-Meteo.com (CC BY 4.0)
 
 JSON is scanned for known keys, not fully parsed.

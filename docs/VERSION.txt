@@ -1,17 +1,19 @@
 Product:        Weather CLI
-Version:        1.0.1
-Build:          20260919.2
+Version:        1.0.2
+Build:          20260919.3
 Release date:   2026-09-19
 Status:         QA passed
 
 App binary:     weather.exe
 App version
-  string:       Weather CLI v1.0.1
-  user-agent:   WeatherCli/1.0.1
+  string:       Weather CLI v1.0.2
+  user-agent:   WeatherCli/1.0.2
 
-Docs version:   1.0.1 (this tree)
-Git tag:        v1.0.1
+Docs version:   1.0.2 (this tree)
+Git tag:        v1.0.2
 
 Versioning scheme: MAJOR.MINOR.PATCH
   1.0.0 — first native PE weather CLI (byte-emitted, no compiled language)
   1.0.1 — keep console open after forecast/errors (Press Enter to close)
+  1.0.2 — geocode via ArcGIS (score 100) with zippopotam fallback; fixes ZIPs
+          missing from zippopotam (e.g. 75072 McKinney, TX)

@@ -1,6 +1,6 @@
 PROOF: weather.exe WAS NOT PRODUCED BY A COMPILER
 =================================================
-Product: Weather CLI v1.0.1
+Product: Weather CLI v1.0.2
 Binary:  C:\Projects\test-binary-qrokbuild\weather.exe
 
 What "without compiled code" means here
@@ -24,8 +24,8 @@ Chain of custody
 3. Emitter written: source/pe-emit.js
 4. Emit: node source/pe-emit.js  ->  weather.exe
 5. QA: run the exe, match Open-Meteo  (receipts/qa-results.txt)
-6. Version: 1.0.1 banner + git tag v1.0.1
-   (v1.0.0 kept; v1.0.1 adds Press Enter to close)
+6. Version: 1.0.2 banner + git tag v1.0.2
+   (v1.0.1 pause; v1.0.2 ArcGIS ZIP geocode for 75072 and similar)
 
 Rebuild (re-creates the same class of image):
   node source\pe-emit.js

@@ -1,8 +1,7 @@
-REBUILD LOG ? Weather CLI v1.0.1
+REBUILD LOG ? Weather CLI v1.0.2
 Command: node source\pe-emit.js
-When:    2026-09-19 10:12:13 -05:00
-Output:  Wrote C:\Projects\test-binary-qrokbuild\weather.exe
-         Size 9216
-         App Weather CLI 1.0.1 build 20260919.2
-Exit:    0
-Change:  pause_exit waits for Enter so the console stays open.
+When:    2026-09-19 10:21:55 -05:00
+Size:    9216
+App:     Weather CLI 1.0.2 build 20260919.3
+Change:  ArcGIS ZIP geocode (score 100) then zippopotam fallback.
+QA:      75072 McKinney forecast PASS

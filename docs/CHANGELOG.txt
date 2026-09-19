@@ -1,6 +1,15 @@
 Weather CLI changelog
 =====================
 
+Version 1.0.2  (2026-09-19)  build 20260919.3
+---------------------------------------------
+- ZIP lookup: ArcGIS World Geocoder first (US, score must be 100)
+  then zippopotam.us fallback
+- Fixes valid ZIPs zippopotam does not know (75072 McKinney, TX)
+- Still rejects bogus ZIPs (00000)
+- Banner / User-Agent: Weather CLI v1.0.2
+- Git tag: v1.0.2
+
 Version 1.0.1  (2026-09-19)  build 20260919.2
 ---------------------------------------------
 - Console stays open after the forecast (and after errors)

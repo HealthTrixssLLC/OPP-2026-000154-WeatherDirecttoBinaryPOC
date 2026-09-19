@@ -1,5 +1,12 @@
-QA RESULTS RECEIPT — Weather CLI v1.0.1
+QA RESULTS RECEIPT — Weather CLI v1.0.2
 =======================================
+v1.0.2 geocode (2026-09-19):
+  75072 McKinney, TX forecast (was missing on zippopotam)  PASS
+  90210 Beverly Hills still works                          PASS
+  10001 New York still works                               PASS
+  00000 still "Could not find location" exit 1             PASS
+  Banner Weather CLI v1.0.2                                PASS
+
 v1.0.1 pause (2026-09-19):
   Banner Weather CLI v1.0.1                              PASS
   "Press Enter to close..." after forecast               PASS

@@ -23,8 +23,8 @@ Import dir RVA/size:  0x2000 / 60
 IAT RVA/size:         0x3000 / 104
 
 SECTIONS
-  .text    VA=0x1000 VSize=3617 RawPtr=0x200 RawSize=4096 Ch=0x60000020
-  .rdata   VA=0x2000 VSize=1312 RawPtr=0x1200 RawSize=1536 Ch=0x40000040
+  .text    VA=0x1000 VSize=3878 RawPtr=0x200 RawSize=4096 Ch=0x60000020
+  .rdata   VA=0x2000 VSize=1472 RawPtr=0x1200 RawSize=1536 Ch=0x40000040
   .data    VA=0x3000 VSize=2976 RawPtr=0x1800 RawSize=3072 Ch=0xc0000040
 
 NOT a .NET image (no mscoree): PASS

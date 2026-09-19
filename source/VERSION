@@ -1,6 +1,6 @@
 Weather CLI emitter
-Version: 1.0.1
-Build: 20260919.2
+Version: 1.0.2
+Build: 20260919.3
 File: source/pe-emit.js
 Role: PE32+ / x64 byte writer (NOT a compiler, NOT the running app)
 Rebuild: node source/pe-emit.js

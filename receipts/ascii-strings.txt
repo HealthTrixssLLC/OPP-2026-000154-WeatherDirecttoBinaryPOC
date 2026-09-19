@@ -10,9 +10,9 @@ Could not reach weather service. Check your internet connection.
 Fetching weather...
  here is the forecast for 
 Data: Open-Meteo.com (CC BY 4.0)
-Weather CLI v1.0.1
-WeatherCli/1.0.1
-User-Agent: WeatherCli/1.0.1
+Weather CLI v1.0.2
+WeatherCli/1.0.2
+User-Agent: WeatherCli/1.0.2
 https://api.zippopotam.us/us/
 https://api.open-meteo.com/v1/forecast?latitude=
 &current=temperature_2m&daily=temperature_2m_max,temperature_2m_min,precipitation_probability_max&temperature_unit=fahrenheit&timezone=auto&forecast_days=7

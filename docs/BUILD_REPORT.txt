@@ -1,11 +1,20 @@
 ================================================================================
 WEATHER CLI — BUILD REPORT
 Product:     Weather CLI
-Version:     1.0.1
-Build:       20260919.2
+Version:     1.0.2
+Build:       20260919.3
 Document:    BUILD_REPORT.txt  (also BUILD_REPORT.rxt)
 Host:        C:\Projects\test-binary-qrokbuild
 ================================================================================
+
+0. REVISION 1.0.2  (2026-09-19)
+-------------------------------
+Change: ZIP geocode uses ArcGIS (score 100) first, zippopotam second.
+        75072 (McKinney, TX) now returns a 7-day forecast instead of
+        "Could not find location".
+QA:     75072 PASS (Now + 7 days); 90210/10001 still PASS; 00000 still
+        "Could not find location" exit 1.
+Git tag: v1.0.2
 
 0. REVISION 1.0.1  (2026-09-19)
 -------------------------------
@@ -109,15 +118,15 @@ Rebuild:
 
 6. VERSION CONTROL
 ------------------
-  App version string:   Weather CLI v1.0.1   (printed at startup)
-  User-Agent:           WeatherCli/1.0.1
-  Docs version:         1.0.1
+  App version string:   Weather CLI v1.0.2   (printed at startup)
+  User-Agent:           WeatherCli/1.0.2
+  Docs version:         1.0.2
   Files:                VERSION
                         source/VERSION
                         docs/VERSION.txt
                         docs/CHANGELOG.txt
-  Git tag:              v1.0.1  (v1.0.0 retained)
-  Receipt:              receipts/git-v1.0.1.txt
+  Git tag:              v1.0.2  (v1.0.0 and v1.0.1 retained)
+  Receipt:              receipts/git-v1.0.2.txt
 
 7. QA RESULTS
 -------------
@@ -160,7 +169,7 @@ SHA256 source/pe-emit.js:
 
 9. TREE
 -------
-  weather.exe                 native app (v1.0.1)
+  weather.exe                 native app (v1.0.2)
   VERSION                     app/docs version stamp
   BUILD_REPORT.txt            this report
   BUILD_REPORT.rxt            same report (requested filename)

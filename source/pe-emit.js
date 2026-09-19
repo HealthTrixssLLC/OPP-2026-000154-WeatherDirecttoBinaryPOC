@@ -8,14 +8,14 @@
  * source, no assembler, no .NET runtime host.
  *
  * Product: Weather CLI
- * Version: 1.0.1
+ * Version: 1.0.2
  */
 const fs = require('fs');
 const path = require('path');
 
 const APP_NAME = 'Weather CLI';
-const APP_VERSION = '1.0.1';
-const APP_BUILD = '20260919.2';
+const APP_VERSION = '1.0.2';
+const APP_BUILD = '20260919.3';
 
 const RAX = 0, RCX = 1, RDX = 2, RBX = 3, RSP = 4, RBP = 5, RSI = 6, RDI = 7;
 const R8 = 8, R9 = 9, R10 = 10, R11 = 11, R12 = 12, R13 = 13, R14 = 14, R15 = 15;
@@ -394,12 +394,17 @@ const STRINGS = {
   s_pct: '%',
   s_space: ' ',
   s_attr: 'Data: Open-Meteo.com (CC BY 4.0)\r\n',
-  s_banner: 'Weather CLI v1.0.1\r\n',
-  s_agent: 'WeatherCli/1.0.1',
-  s_headers: 'User-Agent: WeatherCli/1.0.1\r\n',
-  s_version: '1.0.1',
+  s_banner: 'Weather CLI v1.0.2\r\n',
+  s_agent: 'WeatherCli/1.0.2',
+  s_headers: 'User-Agent: WeatherCli/1.0.2\r\n',
+  s_version: '1.0.2',
   s_pause: '\r\nPress Enter to close...',
   s_url_zip: 'https://api.zippopotam.us/us/',
+  s_url_arc1: 'https://geocode.arcgis.com/arcgis/rest/services/World/GeocodeServer/findAddressCandidates?f=json&singleLine=',
+  s_url_arc2: '&countryCode=USA&maxLocations=1',
+  s_key_score: '"score"',
+  s_key_x: '"x"',
+  s_key_y: '"y"',
   s_url_f1: 'https://api.open-meteo.com/v1/forecast?latitude=',
   s_url_f2: '&longitude=',
   s_url_f3: '&current=temperature_2m&daily=temperature_2m_max,temperature_2m_min,precipitation_probability_max&temperature_unit=fahrenheit&timezone=auto&forecast_days=7',
@@ -1164,7 +1169,60 @@ function emitProgram(a) {
   a.lea_rip(RCX, 's_fetching');
   a.call_lab('print');
 
-  // zip URL
+  // ZIP -> lat/lon: ArcGIS (current US ZIPs) then zippopotam fallback
+  a.lea_rip(RCX, 'd_url');
+  a.lea_rip(RDX, 's_url_arc1');
+  a.call_lab('strcpy');
+  a.lea_rip(RCX, 'd_url');
+  a.lea_rip(RDX, 'd_zip');
+  a.call_lab('append');
+  a.lea_rip(RCX, 'd_url');
+  a.lea_rip(RDX, 's_url_arc2');
+  a.call_lab('append');
+  a.lea_rip(RCX, 'd_url');
+  a.call_lab('http_get');
+  a.test_rr(RAX, RAX);
+  a.je('geo_zippo');
+
+  a.mov_from_rip(RCX, 'd_httpBuf');
+  a.lea_rip(RDX, 's_key_score');
+  a.call_lab('lookup_key');
+  a.test_rr(RAX, RAX);
+  a.je('geo_zippo');
+  a.mov_rr(RCX, RAX);
+  a.lea_rip(RDX, 'd_tmp');
+  a.call_lab('extract_value');
+  a.test_rr(RAX, RAX);
+  a.je('geo_zippo');
+  a.lea_rip(RCX, 'd_tmp');
+  a.call_lab('parse_number');
+  a.cmp_ri(RAX, 100);
+  a.jne('geo_zippo');
+
+  a.mov_from_rip(RCX, 'd_httpBuf');
+  a.lea_rip(RDX, 's_key_y');
+  a.call_lab('lookup_key');
+  a.test_rr(RAX, RAX);
+  a.je('geo_zippo');
+  a.mov_rr(RCX, RAX);
+  a.lea_rip(RDX, 'd_lat');
+  a.call_lab('extract_value');
+  a.test_rr(RAX, RAX);
+  a.je('geo_zippo');
+
+  a.mov_from_rip(RCX, 'd_httpBuf');
+  a.lea_rip(RDX, 's_key_x');
+  a.call_lab('lookup_key');
+  a.test_rr(RAX, RAX);
+  a.je('geo_zippo');
+  a.mov_rr(RCX, RAX);
+  a.lea_rip(RDX, 'd_lon');
+  a.call_lab('extract_value');
+  a.test_rr(RAX, RAX);
+  a.je('geo_zippo');
+  a.jmp('geo_ok');
+
+  a.label('geo_zippo');
   a.lea_rip(RCX, 'd_url');
   a.lea_rip(RDX, 's_url_zip');
   a.call_lab('strcpy');
@@ -1197,6 +1255,7 @@ function emitProgram(a) {
   a.call_lab('extract_value');
   a.test_rr(RAX, RAX);
   a.je('die_loc');
+  a.label('geo_ok');
 
   // forecast URL
   a.lea_rip(RCX, 'd_url');
